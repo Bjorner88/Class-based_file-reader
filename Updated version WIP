@@ -1,0 +1,140 @@
+import csv
+import pandas as pd
+import os
+
+#To Do
+#---------------------
+#Read data from file
+#Options to choose row/column for data input in file
+#---------------------
+
+
+    #OPENING
+class file_input(object):
+        #Class Variable
+    onefile = ''
+    
+    def __init__(file):
+        start = file       
+      
+    def startcode(file): 
+        
+        print('BJORNS DATA EXTRACTOR\n')
+        
+        print('Please enter name of the file to open. \nExisting files must be located in current directory.\nIf file does not exist, it will be created.\nEditing will commence after you have chosen.')
+        
+        print('\nPlease enter name of the .csv file, located in this directory, that you would like to look at.\n')
+       
+        x = input()
+        
+        #Assign new value to Class variable
+        file_input.onefile = '{}'.format(x)+'.csv'
+        onefile = file_input.onefile
+        
+        print('\nYou requested: {}'.format(onefile))
+        print(onefile)
+
+        if os.path.isfile('./{}'.format(onefile)) == True: 
+            print('\nFile existence confirmed. Opening...\n')
+
+            fast = read_write() 
+                               
+        elif os.path.isfile('./{}'.format(onefile)) == False:
+            print('\nFile does not exist. Creating...')
+            
+            detour = new_file()
+            fast = read_write() 
+            
+        else:
+            print('\nYou messed up.')
+
+    #READING AND WRITING
+    
+class new_file(file_input):
+    
+    onefile = file_input.onefile
+    
+    def __init__(file):
+        with open('{}'.format(file_input.onefile), 'w', newline='') as file: #Kanske inte skriva till filen?
+            return
+
+class read_write(file_input):
+    #twofile = file_input.onefile
+    
+    def __init__(file):
+        print('\nReader activated.')
+        data = open('{}'.format(file_input.onefile))#, 'w', newline='') as file: WITH innan, #Kanske inte skriva till filen?
+        csv_data = csv.reader(data)
+        data_lines = list(csv_data)
+        
+        def read_data(file):    
+        
+            choice = 'wrong'
+        
+            while choice not in ['y','Y','n','N']:
+        
+                answer = input('\nDo you want to see the data inside? Y or N ')
+        
+                if answer in ['y','Y']: 
+                    #PRINT FILE     
+                    print('\nPrinting rows 1-5: ')
+                    for datarow in data_lines[:5]:
+                        print(datarow)
+                    return
+            
+                elif answer in ['n','N']:
+                    print('\nNot printing data then....')
+                    continue
+
+                elif answer not in ['y','Y','n','N']:
+                    print('\nWrong answer. Try again.')
+        
+                else:
+                    print('\nYou messed up.')
+        
+        glasses = read_data(file)
+        
+        def write_data(file):
+            
+            idea = 'wrong'
+        
+            while idea not in ['y','Y','n','N']:
+        
+                answer_two = input('\nDo you want to write data to your selected file? Y or N ')
+        
+                if answer_two in ['y','Y']: 
+                    
+                    with open('{}'.format(file_input.onefile), 'w', newline='') as file:
+                        writer = csv.writer(file)
+                        #Select row
+                        
+                        num = input('Select number of rows you want to write to: ')
+                        
+                        def rows():
+                            words = input('\nWrite your input here: ')
+                            writer.writerow([words]) #rowS skriver flera rader
+                            return #skriver bara en gång
+                        
+                        for x in num:
+                            raw = rows()                
+                            return
+                
+                
+                elif answer_two in ['n','N']:
+                    print('\nNot writing data then....')
+                    continue
+
+                elif answer_two not in ['y','Y','n','N']:
+                    print('\nWrong answer. Try again.')
+        
+                else:
+                    print('\nYou messed up.')
+        
+        blind = write_data(file)
+            
+           # ----------------------- PROGRAM START BELOW ------------------
+zeb = file_input()
+zeb.startcode()
+            
+            
+            
